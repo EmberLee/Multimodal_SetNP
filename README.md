@@ -15,24 +15,18 @@
    학습 코드. 사용법은 아래 Getting started 참조.
    모델 체크포인트 파일이 `exp/exp_name/` 위치에 저장된다.
    학습 기록은 `logs/` 위치에서 확인할 수 있다.
-   1 epoch 이 완료될 때마다 validation set 에 대해 성능 평가를 진행한다. `evaluate.py` 내의 `evaluate()` 함수를 사용. 
-   
+   1 epoch 이 완료될 때마다 validation set 에 대해 성능 평가를 진행한다. `evaluate.py` 내의 `evaluate()` 함수를 사용.
+
 7. `evaluate.py`  
    추론 코드. 사용법은 아래 Getting started 참조.
    성능 평가 지표로 **AUROC**, AUPRC 를 사용. F1 score 도 도입 예정.
-   
+
 9. `Makefile`  
    학습에 필요한 여러 argument 를 매번 타이핑해주는 불편을 해소하기 위해, 전체 command 를 미리 작성해놓기 위한 파일.
-10. `preproess/`  
-   MIMIC 등 원본 데이터셋으로부터 1시간 간격의 EMR 데이터셋을 생성하기 위한 코드. 여러 단계로 구성.  
-   `preprocess/01_VitalCare-Model-v2/pysrc/` 내부 설명  
-   `01_~.py`: 4단계의 전처리가 끝난 vital-sign, lab data 등을 종합하여, 29개의 EMR Feature 를 시간정보와 align 시키는 파일  
-   `02-0_~.py`: 멀티모달 데이터 생성 파일. 환자의 입/퇴실시간 및 질병의 onset 시점을 종합하여 1시간 간격으로 멀티모달(EMR, note, image) 데이터와 라벨을 생성.  
-   `02-1_~.py`: train/val/test split 수행 코드.  
-   
-11. `utils/`  
-12. `exp/`  
-13. `logs/`  
+
+10. `utils/`  
+11. `exp/`  
+12. `logs/`  
 
 ## 시작하기(Getting started)
 
@@ -47,7 +41,7 @@
     ```   
     - Add your env_file name into the env_file_list in `run_all.sh` and run it.
     - This script will run `00_split_by_hash.sh` and `01_split_by_chid.sh` to generate splitted raw files in `01_VitalCare-Model-v2/data/reform-rawdata/`.
-    
+
     ```
     ./run_all.sh
     ```   
@@ -59,7 +53,7 @@
     cd 01_VitalCare-Model-v2/script/extract-feature/
     ./generate_envs.sh
     ```
-    - 
+    -
     1-1-3. Run diagnose-sepsis   
     - Generate environment files at each step. Make sure you have env_files that you want to preprocess.
     ```
@@ -72,7 +66,7 @@
     cd 01_VitalCare-Model-v2/script/define-profile/
     ./generate_envs.sh
     ```
-    - 
+    -
     1-1-5. Run trajectory_data_w_time.py   
     ```
     cd 01_VitalCare-Model-v2/pysrc/
@@ -145,7 +139,7 @@ The format of the dataset is as follows:
 - 'LABEL': (total timesteps, # of events)
 - 'TXT': (total timesteps, # of tokens)
 - 'EMR': (total timesteps, 29)
-- 'TXT_VALID_STEPS': 
+- 'TXT_VALID_STEPS':
 - 'EMR_VALID_STEPS':
 - 'CHID':
 
@@ -163,7 +157,7 @@ with open('data.pkl', 'wb') as f:
 
 ## Experiments
 성능 기록:
-https://www.notion.so/db42d622a03f41aabc31a453785a9e7a?v=13535c8862ee453bb7c4feefe9862dc0
+https://mechkbd.wiki/ (타 링크 임시 게재)
 
 |AUROC|내용|설명|
 |------|---|---|
@@ -176,5 +170,4 @@ https://www.notion.so/db42d622a03f41aabc31a453785a9e7a?v=13535c8862ee453bb7c4fee
 
 ## Contacts
 
-- Inggeol Lee: ingulbull@aitrics.com
-- Jaeyoung Lee: relyks@aitrics.com
+- Inggeol Lee: ingulbull@naver.com
